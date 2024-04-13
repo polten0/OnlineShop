@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OnlineShop_4M.Data;
+using OnlineShop_4M_DataAccess.Data;
 
 #nullable disable
 
-namespace OnlineShop_4M.Migrations
+namespace OnlineShop_4M_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20240316171952_Identity")]

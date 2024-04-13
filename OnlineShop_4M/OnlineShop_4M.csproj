@@ -25,14 +25,12 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Data\" />
     <None Remove="Views\Category\" />
     <None Remove="Views\Company\" />
     <None Remove="Views\Product\" />
     <None Remove="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Company\" />
     <Folder Include="Views\Product\" />
@@ -49,6 +47,9 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
     <ProjectReference Include="..\OnlineShop_4M_Models\OnlineShop_4M_Models.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineShop_4M_DataAccess\OnlineShop_4M_DataAccess.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>

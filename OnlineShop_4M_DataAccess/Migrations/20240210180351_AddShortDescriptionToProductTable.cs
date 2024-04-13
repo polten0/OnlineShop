@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace OnlineShop_4M.Migrations
+namespace OnlineShop_4M_DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddShortDescriptionToProductTable : Migration

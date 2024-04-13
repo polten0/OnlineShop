@@ -3,15 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OnlineShop_4M.Data;
+using OnlineShop_4M_DataAccess.Data;
 
 #nullable disable
 
-namespace OnlineShop_4M.Migrations
+namespace OnlineShop_4M_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240120154808_AddTableCompanyToDb")]
-    partial class AddTableCompanyToDb
+    [Migration("20240113160911_AddCategoryToDatabase")]
+    partial class AddCategoryToDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,25 +35,6 @@ namespace OnlineShop_4M.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("OnlineShop_4M.Models.Company", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Company");
                 });
 #pragma warning restore 612, 618
         }

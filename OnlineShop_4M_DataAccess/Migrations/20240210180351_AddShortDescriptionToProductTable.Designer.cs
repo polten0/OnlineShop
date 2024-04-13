@@ -3,15 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OnlineShop_4M.Data;
+using OnlineShop_4M_DataAccess.Data;
 
 #nullable disable
 
-namespace OnlineShop_4M.Migrations
+namespace OnlineShop_4M_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240120162713_AddTableProductToDb")]
-    partial class AddTableProductToDb
+    [Migration("20240210180351_AddShortDescriptionToProductTable")]
+    partial class AddShortDescriptionToProductTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,6 +79,10 @@ namespace OnlineShop_4M.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("REAL");
+
+                    b.Property<string>("ShortDescription")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

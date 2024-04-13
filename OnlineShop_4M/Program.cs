@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using OnlineShop_4M.Data;
+using OnlineShop_4M_DataAccess.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -4,7 +4,7 @@ using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using OnlineShop_4M.Data;
+using OnlineShop_4M_DataAccess.Data;
 using OnlineShop_4M_Models;
 using OnlineShop_4M_Models.ViewModels;
 using OnlineShop_4M_Utility;

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop_4M.Data;
+using OnlineShop_4M_DataAccess.Data;
 using OnlineShop_4M_Models;
 using OnlineShop_4M_Utility;
 

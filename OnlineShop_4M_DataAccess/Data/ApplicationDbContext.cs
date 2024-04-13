@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop_4M_Models;
 
-namespace OnlineShop_4M.Data
+namespace OnlineShop_4M_DataAccess.Data
 {
 	public class ApplicationDbContext : IdentityDbContext
 	{
