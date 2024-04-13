@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using OnlineShop_4M.Models;
+using OnlineShop_4M_Models;
 using OnlineShop_4M_Utility;
 
 namespace OnlineShop_4M.Areas.Identity.Pages.Account

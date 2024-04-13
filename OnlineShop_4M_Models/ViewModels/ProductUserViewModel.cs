@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnlineShop_4M.Models.ViewModels
+namespace OnlineShop_4M_Models.ViewModels
 {
 	public class ProductUserViewModel
 	{

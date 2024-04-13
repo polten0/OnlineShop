@@ -29,7 +29,6 @@
     <None Remove="Views\Category\" />
     <None Remove="Views\Company\" />
     <None Remove="Views\Product\" />
-    <None Remove="Models\ViewModels\" />
     <None Remove="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
@@ -37,7 +36,6 @@
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Company\" />
     <Folder Include="Views\Product\" />
-    <Folder Include="Models\ViewModels\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\images\product\" />
     <Folder Include="Views\Cart\" />
@@ -48,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnlineShop_4M_Utility\OnlineShop_4M_Utility.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineShop_4M_Models\OnlineShop_4M_Models.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>

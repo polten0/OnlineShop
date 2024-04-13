@@ -1,7 +1,7 @@
 ﻿using System;
 using OnlineShop_4M.Models;
 
-namespace OnlineShop_4M.Models.ViewModels
+namespace OnlineShop_4M_Models.ViewModels
 {
 	public class HomeViewModel
 	{

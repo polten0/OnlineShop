@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using OnlineShop_4M.Models;
+using OnlineShop_4M_Models;
 
 namespace OnlineShop_4M.Data
 {

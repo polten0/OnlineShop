@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShop_4M.Models
+namespace OnlineShop_4M_Models
 {
 	public class Company
 	{

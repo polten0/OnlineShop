@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop_4M_Models", "OnlineShop_4M_Models\OnlineShop_4M_Models.csproj", "{1333A105-FF41-4250-825A-100B311D09E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{DF0D80FA-461D-4C1C-AA25-E35318B2A05C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF0D80FA-461D-4C1C-AA25-E35318B2A05C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF0D80FA-461D-4C1C-AA25-E35318B2A05C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1333A105-FF41-4250-825A-100B311D09E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1333A105-FF41-4250-825A-100B311D09E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1333A105-FF41-4250-825A-100B311D09E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1333A105-FF41-4250-825A-100B311D09E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

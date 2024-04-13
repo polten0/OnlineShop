@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop_4M.Data;
-using OnlineShop_4M.Models;
-using OnlineShop_4M.Models.ViewModels;
+using OnlineShop_4M_Models;
+using OnlineShop_4M_Models.ViewModels;
 using OnlineShop_4M_Utility;
 
 namespace OnlineShop_4M.Controllers;

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace OnlineShop_4M.Models
+namespace OnlineShop_4M_Models
 {
 	public class ShoppingCart
 	{

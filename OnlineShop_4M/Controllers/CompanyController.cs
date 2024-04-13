@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop_4M.Data;
-using OnlineShop_4M.Models;
+using OnlineShop_4M_Models;
 using OnlineShop_4M_Utility;
 
 namespace OnlineShop_4M.Controllers

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OnlineShop_4M.Models
+namespace OnlineShop_4M_Models
 {
 	public class Product
 	{
