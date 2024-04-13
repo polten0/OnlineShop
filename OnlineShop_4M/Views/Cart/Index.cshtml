@@ -1,0 +1,50 @@
+﻿@using OnlineShop_4M_Utility
+@model IEnumerable<Product>
+
+<h1>Корзина покупок</h1>
+
+@if (Model.Count() > 0)
+{
+    <form method="post">
+
+        <p>
+            <a class="btn btn-primary" asp-action="Index"
+               asp-controller="Home">Продолжить покупки</a>
+        </p>
+
+        <p> Детализация товаров </p>
+
+        <p> Цена </p>
+
+        @foreach (var product in Model)
+        {
+            <p>
+                <img src="@PathManager.ImagePath@product.Image" width="200" class="rounded" />
+            </p>
+
+            <p>Название продукта: @product.Name</p>
+
+            <p>Описание продукта: @product.ShortDescription</p>
+
+            <p>Цена продукта: @product.Price</p>
+
+            <p>
+                <a asp-action="Remove" asp-route-Id="@product.Id"
+                   class="btn btn-danger">Удалить продукт</a>
+            </p>
+        }
+
+
+
+        <p>
+            <button asp-action="Summary" type="submit" class="btn btn-success from-control">
+                Продолжить
+            </button>
+        </p>
+
+    </form>
+}
+else
+{
+    <p>Пожалуйста, добавьте товар в корзину. Тут пусто :(</p>
+}

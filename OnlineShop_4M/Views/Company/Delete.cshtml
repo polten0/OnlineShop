@@ -1,0 +1,20 @@
+﻿@model Company
+
+<h1>Удаление компании</h1>
+
+<form method="post" asp-action="Delete">
+
+    <div class="mb-3">
+        <label class="form-label">Название компании</label>
+        <input type="text" asp-for="Name" class="form-control" disabled>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Country" class="form-label"></label>
+        <input asp-for="Country" class="form-control" disabled>
+    </div>
+
+    <input class="btn btn-danger" type="submit" value="Удалить" />
+
+    <a asp-action="Index" class="btn btn-warning">Вернуться назад</a>
+</form>

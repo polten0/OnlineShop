@@ -1,0 +1,74 @@
+﻿@using OnlineShop_4M_Utility
+@using OnlineShop_4M.Models
+
+@model Product
+
+
+<form method="post" asp-action="DeletePost">
+
+    <!-- Передаем скрытые данные -->
+    <input asp-for="Id" hidden />
+
+    <div class="mb-3">
+        <label class="form-label">Название продукта</label>
+        <input type="text" asp-for="Name" class="form-control" disabled>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control" disabled>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control summernote" disabled> </textarea>
+    </div>
+
+    <!--
+    <div class="mb-3">
+        <label class="form-label">Картинка</label>
+        <input type="file" name="files" class="form-control" id="uploadBox" />
+    </div>
+    -->
+
+    <div class="mb-3">
+        <img src="@PathManager.ImagePath@Model.Image" width="200" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Категория</label>
+        <input asp-for="Category.Name" class="form-control" disabled>
+    </div>
+
+
+    <input class="btn btn-danger" type="submit" value="Удалить" />
+
+    <a asp-action="Index" class="btn btn-warning">Вернуться назад</a>
+
+</form>
+
+
+@section Scripts {
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+    <script>// for summernote
+        $(document).ready(function () {
+            $('.summernote').summernote("disable");
+        });
+
+        // for alert
+        function validateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire({
+                    title: "Ошибка!",
+                    text: "Пожалуйста, загрузите изображение!",
+                    icon: "error"
+                });
+                return false;
+            }
+            return true;
+        }</script>
+}

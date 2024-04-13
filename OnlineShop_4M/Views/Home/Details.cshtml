@@ -1,0 +1,30 @@
+﻿@using OnlineShop_4M_Utility
+@model OnlineShop_4M.Models.ViewModels.DetailsViewModel
+
+<form method="post">
+
+    <h1>Название: @Model.Product.Name</h1>
+
+    <h1>Цена: @Model.Product.Price</h1>
+
+    <img width="100" src="@PathManager.ImagePath@Model.Product.Image" />
+
+    <p>Описание продукта: @Model.Product.Description</p>
+
+    <p>Категория: @Model.Product.Category.Name</p>
+
+    <a class="btn btn-success" asp-action="Index">Назад</a>
+
+    @if (Model.ExistsInCart)
+    {
+        <a class="btn btn-warning" asp-action="RemoveFromCart"
+           asp-route-Id="@Model.Product.Id">
+            Удалить из корзины
+        </a>
+    }
+    else
+    {
+        <input class="btn btn-info" type="submit" value="Добавить в корзину" />
+    }
+
+</form>

@@ -1,0 +1,20 @@
+﻿@model Category
+
+<h1>Удаление категории</h1>
+
+<form method="post" asp-action="Delete">
+
+    <div class="mb-3">
+        <label class="form-label">Название категории</label>
+        <input type="text" asp-for="Name" class="form-control" disabled>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DisplayOrder" class="form-label"></label>
+        <input asp-for="DisplayOrder" class="form-control" disabled>
+    </div>
+
+    <input class="btn btn-danger" type="submit" value="Удалить" />
+
+    <a asp-action="Index" class="btn btn-warning">Вернуться назад</a>
+</form>

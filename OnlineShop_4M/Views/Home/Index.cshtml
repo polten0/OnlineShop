@@ -1,0 +1,36 @@
+﻿@using OnlineShop_4M_Utility
+@model OnlineShop_4M.Models.ViewModels.HomeViewModel;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+
+    @foreach (var prod in Model.Products)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <img src="@PathManager.ImagePath@prod.Image" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@prod.Name</h5>
+                    <p class="card-text">@prod.ShortDescription</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@prod.Category.Name</li>
+                    <li class="list-group-item">@prod.Price</li>
+                    <li class="list-group-item">Id: @prod.Id</li>
+                </ul>
+                <div class="card-body">
+                    <a asp-action="Details" asp-route-Id="@prod.Id" class="card-link">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

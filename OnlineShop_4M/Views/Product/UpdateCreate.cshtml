@@ -1,0 +1,116 @@
+﻿@using OnlineShop_4M.Models.ViewModels
+@using OnlineShop_4M_Utility
+@model ProductViewModel
+
+@if (Model.Product.Id != 0)
+{
+    // edit
+    <h1>Изменение продукта</h1>
+}
+else
+{
+    <h1>Создание продукта</h1>
+}
+
+<form method="post" enctype="multipart/form-data">
+
+    <!-- Передаем скрытые данные -->
+    <input asp-for="Product.Id" hidden />
+
+    <div class="mb-3">
+        <label class="form-label">Название продукта</label>
+        <input type="text" asp-for="Product.Name" class="form-control">
+        <span asp-validation-for="Product.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Product.Price" class="form-label"></label>
+        <input asp-for="Product.Price" class="form-control">
+        <span asp-validation-for="Product.Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Product.ShortDescription" class="form-label"></label>
+        <input asp-for="Product.ShortDescription" class="form-control">
+        <span asp-validation-for="Product.ShortDescription" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Product.Description" class="form-label"></label>
+        <textarea asp-for="Product.Description" class="form-control summernote"> </textarea>
+        <span asp-validation-for="Product.Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Картинка</label>
+        <input type="file" name="files" class="form-control" id="uploadBox" />
+    </div>
+
+    @if (Model.Product.Id != 0)
+    {
+        <div class="mb-3">
+            <img src="@PathManager.ImagePath@Model.Product.Image" width="200" />
+        </div>
+    }
+
+    <div class="mb-3">
+        <label class="form-label">Выбор категории</label>
+        <select asp-for="Product.CategoryId" class="form-control" asp-items="@Model.CategoryDropDown">
+            <option selected>-- Выберите категорию --</option>
+        </select>
+        <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+    </div>
+
+    @if (Model.Product.Id != 0)
+    {
+        <input class="btn btn-danger" type="submit" value="Обновить" />
+    }
+    else
+    {
+        <input class="btn btn-primary" type="submit" value="Создать"
+               onclick="validateInput()" />
+    }
+
+
+
+    <a asp-action="Index" class="btn btn-warning">Вернуться назад</a>
+
+    <p>
+        <div asp-validation-summary="All"></div>
+    </p>
+
+</form>
+
+
+@section Scripts {
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+    <script>// for summernote
+        $(document).ready(function () {
+            $('.summernote').summernote({
+                height: 200,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                ]
+            });
+        });
+
+        // for alert
+        function validateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire({
+                    title: "Ошибка!",
+                    text: "Пожалуйста, загрузите изображение!",
+                    icon: "error"
+                });
+                return false;
+            }
+            return true;
+        }</script>
+}
