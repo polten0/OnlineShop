@@ -164,11 +164,9 @@ namespace OnlineShop_4M_DataAccess.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderDisplayName")
@@ -206,11 +204,9 @@ namespace OnlineShop_4M_DataAccess.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
@@ -221,7 +217,7 @@ namespace OnlineShop_4M_DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OnlineShop_4M.Models.Category", b =>
+            modelBuilder.Entity("OnlineShop_4M_Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -239,7 +235,7 @@ namespace OnlineShop_4M_DataAccess.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("OnlineShop_4M.Models.Company", b =>
+            modelBuilder.Entity("OnlineShop_4M_Models.Company", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -258,7 +254,7 @@ namespace OnlineShop_4M_DataAccess.Migrations
                     b.ToTable("Company");
                 });
 
-            modelBuilder.Entity("OnlineShop_4M.Models.Product", b =>
+            modelBuilder.Entity("OnlineShop_4M_Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -293,7 +289,7 @@ namespace OnlineShop_4M_DataAccess.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("OnlineShop_4M.Models.ApplicationUser", b =>
+            modelBuilder.Entity("OnlineShop_4M_Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -355,9 +351,9 @@ namespace OnlineShop_4M_DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OnlineShop_4M.Models.Product", b =>
+            modelBuilder.Entity("OnlineShop_4M_Models.Product", b =>
                 {
-                    b.HasOne("OnlineShop_4M.Models.Category", "Category")
+                    b.HasOne("OnlineShop_4M_Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
