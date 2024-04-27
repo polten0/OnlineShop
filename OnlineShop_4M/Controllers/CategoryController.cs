@@ -4,22 +4,23 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShop_4M_DataAccess.Data;
 using OnlineShop_4M_Models;
 using OnlineShop_4M_Utility;
+using OnlineShop_4M_DataAccess.Repository.IRepository;
 
 namespace OnlineShop_4M.Controllers
 {
 	[Authorize(Roles = PathManager.AdminRole)]
 	public class CategoryController : Controller
 	{
-		private ApplicationDbContext context;
+		private ICategoryRepository categoryRepository;
 
-		public CategoryController(ApplicationDbContext context)
+		public CategoryController(ICategoryRepository categoryRepository)
 		{
-			this.context = context;
+			this.categoryRepository = categoryRepository;
 		}
 
         public IActionResult Index()
 		{
-			List<Category> categoryList = context.Category.ToList();
+            List<Category> categoryList = categoryRepository.GetAll().ToList();
 
 			return View(categoryList);
 		}
@@ -35,8 +36,8 @@ namespace OnlineShop_4M.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-                context.Category.Add(category);
-                context.SaveChanges();
+				categoryRepository.Add(category);
+				categoryRepository.Save();
 
                 return RedirectToAction("Index");
             }
@@ -52,9 +53,9 @@ namespace OnlineShop_4M.Controllers
 				return NotFound();
 			}
 
-			var category = context.Category.Find(id);
+			var category = categoryRepository.Find(id.GetValueOrDefault());
 
-			return View(category);
+            return View(category);
 		}
 
 		[HttpPost]
@@ -62,8 +63,8 @@ namespace OnlineShop_4M.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				context.Category.Update(category);   // !!! EF UPDATE
-				context.SaveChanges();
+				categoryRepository.Update(category);
+				categoryRepository.Save();
 
 				return RedirectToAction("Index");
 			}
@@ -78,9 +79,9 @@ namespace OnlineShop_4M.Controllers
                 return NotFound();
             }
 
-            var category = context.Category.Find(id);
+			var category = categoryRepository.Find(id.GetValueOrDefault());
 
-			if (category == null)
+            if (category == null)
 			{
                 return NotFound();
             }
@@ -93,15 +94,15 @@ namespace OnlineShop_4M.Controllers
 		{
 			int id = category.Id;
 
-			var categoryFromBase = context.Category.Find(id);
+			var categoryFromBase = categoryRepository.Find(id);
 
-			if (categoryFromBase == null)
+            if (categoryFromBase == null)
 			{
 				return NotFound();
 			}
 
-			context.Category.Remove(categoryFromBase);
-			context.SaveChanges();
+			categoryRepository.Remove(categoryFromBase);
+			categoryRepository.Save();
 
 			return RedirectToAction("Index");
 		}
