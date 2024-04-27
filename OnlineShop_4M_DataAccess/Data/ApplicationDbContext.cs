@@ -13,6 +13,9 @@ namespace OnlineShop_4M_DataAccess.Data
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
+        public DbSet<InquiryHeader> InquiryHeader { get; set; }
+        public DbSet<InquiryDetail> InquiryDetail { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
 			base(options) { }
     }
