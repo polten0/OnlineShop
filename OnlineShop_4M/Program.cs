@@ -9,6 +9,7 @@ using OnlineShop_4M_DataAccess.Repository.IRepository;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
