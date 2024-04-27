@@ -11,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IInquiryHeaderRepository, InquiryHeaderRepository>();
+builder.Services.AddScoped<IInquiryDetailRepository, InquiryDetailRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
