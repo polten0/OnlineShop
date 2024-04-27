@@ -9,6 +9,9 @@ namespace OnlineShop_4M_Utility
 
 		public const string AdminRole = "Admin";
 		public const string CustomerRole = "Customer";
+
+		public const string CategoryName = "Category";
+		public const string CompanyName = "Company";
 	}
 }
 

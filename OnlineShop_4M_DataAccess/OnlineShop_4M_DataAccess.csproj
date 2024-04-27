@@ -26,5 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnlineShop_4M_Models\OnlineShop_4M_Models.csproj" />
+    <ProjectReference Include="..\OnlineShop_4M_Utility\OnlineShop_4M_Utility.csproj" />
   </ItemGroup>
 </Project>
