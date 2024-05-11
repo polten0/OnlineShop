@@ -2,7 +2,7 @@
 
 <h1>Summary</h1>
 
-<form>
+<form asp-action="SummaryPost">
 
     <h3>Данные заказчика</h3>
 
@@ -23,11 +23,14 @@
 
     <h3>Данные заказа</h3>
 
-    @foreach (var item in Model.ProductList)
+    @for (var i = 0; i < Model.ProductList.Count; i++)
     {
+        <input type="hidden" asp-for="@Model.ProductList[i].Id" />
+        <input type="hidden" asp-for="@Model.ProductList[i].Name" />
+
         <p>
-            <h5>Название продукта: @item.Name</h5>
-            <small>Цена продукта: @item.Price</small>
+            <h5>Название продукта: @Model.ProductList[i].Name</h5>
+            <small>Цена продукта: @Model.ProductList[i].Price</small>
         </p>
     }
 
