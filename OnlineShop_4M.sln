@@ -1,20 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 25.0.1706.7
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop_4M", "OnlineShop_4M\OnlineShop_4M.csproj", "{8C3DCBE2-41EF-46F0-AE3C-21C1AD1210B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop_4M", "OnlineShop_4M\OnlineShop_4M.csproj", "{8C3DCBE2-41EF-46F0-AE3C-21C1AD1210B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop_4M_Utility", "OnlineShop_4M_Utility\OnlineShop_4M_Utility.csproj", "{DF0D80FA-461D-4C1C-AA25-E35318B2A05C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop_4M_Utility", "OnlineShop_4M_Utility\OnlineShop_4M_Utility.csproj", "{DF0D80FA-461D-4C1C-AA25-E35318B2A05C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1E63B5E8-6E07-44F1-A751-6B355B7ED019}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop_4M_Models", "OnlineShop_4M_Models\OnlineShop_4M_Models.csproj", "{1333A105-FF41-4250-825A-100B311D09E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop_4M_Models", "OnlineShop_4M_Models\OnlineShop_4M_Models.csproj", "{1333A105-FF41-4250-825A-100B311D09E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop_4M_DataAccess", "OnlineShop_4M_DataAccess\OnlineShop_4M_DataAccess.csproj", "{A93EA98C-AE0C-4AB2-BB33-4C9CD3C219D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop_4M_DataAccess", "OnlineShop_4M_DataAccess\OnlineShop_4M_DataAccess.csproj", "{A93EA98C-AE0C-4AB2-BB33-4C9CD3C219D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

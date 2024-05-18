@@ -9,6 +9,7 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.15" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.15" />
@@ -23,6 +24,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="MimeKit" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Category\" />
@@ -36,11 +38,13 @@
     <Folder Include="Views\Product\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\images\product\" />
-    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\images\" />
     <Content Remove="wwwroot\images\product\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Inquiry\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnlineShop_4M_Utility\OnlineShop_4M_Utility.csproj">
