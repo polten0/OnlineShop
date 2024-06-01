@@ -56,9 +56,24 @@ namespace OnlineShop_4M.Controllers
             // извлекаем продукты по id
             // IEnumerable<Product> productList =
             //     context.Product.Where(x => productIdCart.Contains(x.Id));
-            IEnumerable<Product> productList = productRepository.GetAll(x => productIdCart.Contains(x.Id));
 
-            return View(productList);
+            IEnumerable<Product> productListTemp = productRepository.GetAll(x => productIdCart.Contains(x.Id));
+
+
+            // нужно, так как TempCount передается по умолчанию как 1, а значение
+            // хранится в shoppingCartList
+            List<Product> productList = new List<Product>();
+
+            foreach (var item in shoppingCartList)
+            {
+                Product productTemp = productListTemp.FirstOrDefault(x => x.Id == item.ProductId);
+                productTemp.TempCount = item.Count;
+
+                productList.Add(productTemp);
+            }
+           
+
+            return View(productListTemp);
         }
 
         public IActionResult Remove(int id)
@@ -108,9 +123,20 @@ namespace OnlineShop_4M.Controllers
             List<int> productIdCart = shoppingCartList.Select(x => x.ProductId).ToList();
 
             // извлекаем продукты по id
-            // IEnumerable<Product> productList =
+            // IEnumerable<Product> productList = 
             //     context.Product.Where(x => productIdCart.Contains(x.Id));
-            IEnumerable<Product> productList = productRepository.GetAll(x => productIdCart.Contains(x.Id));
+            IEnumerable<Product> productListTemp = productRepository.GetAll(x => productIdCart.Contains(x.Id));
+
+            List<Product> productList = new List<Product>();
+
+            foreach (var item in shoppingCartList)
+            {
+                Product productTemp = productListTemp.FirstOrDefault(x => x.Id == item.ProductId);
+                productTemp.TempCount = item.Count;
+
+                productList.Add(productTemp);
+            }
+
 
             ProductUserViewModel viewModel = new ProductUserViewModel()
             {

@@ -14,7 +14,7 @@ function loadDataTable() {
             { "data": "email" },
             {
                 "data": "id",
-                "render": (id) => `<a href="/inquiry/detail/${id}" class="btn btn-success">GO</a>`
+                "render": (id) => `<a href="/inquiry/details/${id}" class="btn btn-success">GO</a>`
             }
         ]
     });

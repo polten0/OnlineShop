@@ -1,0 +1,50 @@
+﻿@model OnlineShop_4M_Models.ViewModels.InquiryViewModel
+
+<form method="post">
+
+    <input hidden asp-for="InquiryHeader.Id"/>
+
+    <h1>Заказчик</h1>
+
+    <p>
+        <label>Имя</label>
+        <input type="text" class="form-control" asp-for="InquiryHeader.FullName" disabled />
+    </p>
+
+    <p>
+        <label>Телефон</label>
+        <input type="text" class="form-control" asp-for="InquiryHeader.PhoneNumber" disabled />
+    </p>
+
+    <p>
+        <label>Email</label>
+        <input type="text" class="form-control" asp-for="InquiryHeader.Email" disabled />
+    </p>
+
+    <p>
+        <label>Дата заявки</label>
+        <input type="text" class="form-control" asp-for="InquiryHeader.InquiryDate" disabled />
+    </p>
+
+    <p>
+        <input type="submit" value="Вернуться к заявкам" class="btn btn-primary"
+               asp-action="Index" />
+
+        <input type="submit" value="Converto to cart" class="btn btn-info"
+               asp-action="ConvertToCart"/>
+
+        <input asp-action="Delete" type="submit" value="Delete" class="btn btn-danger"
+               formmethod="post" />
+    </p>
+
+
+    <h2>Информация по заказу</h2>
+
+    @foreach (var item in Model.InquiryDetails)
+        {
+            <h6>Название товара: @item.Product.Name</h6>
+            <p>Цена: @item.Product.Price</p>
+            <p>----</p>
+        }
+
+</form>

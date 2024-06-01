@@ -18,6 +18,10 @@
 
         <p> Цена </p>
 
+        @{
+            double totalOrder = 0;
+        }
+
         @foreach (var product in Model)
         {
             <p>
@@ -30,12 +34,20 @@
 
             <p>Цена продукта: @product.Price</p>
 
+            <p>Кол-во товара: @product.TempCount</p>
+
+            <p>Цена за все продукты: @(product.Price * product.TempCount)</p>
+
             <p>
                 <a asp-action="Remove" asp-route-Id="@product.Id"
                    class="btn btn-danger">Удалить продукт</a>
             </p>
-        }
 
+             totalOrder += product.Price * product.TempCount;
+            }
+
+
+        <h2>Стоимость покупки: @string.Format("{0:c}", totalOrder)</h2>
 
 
         <p>

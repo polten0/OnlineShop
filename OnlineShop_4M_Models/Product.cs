@@ -6,6 +6,11 @@ namespace OnlineShop_4M_Models
 {
 	public class Product
 	{
+		public Product()
+		{
+			TempCount = 1;
+        }
+
 		[Key]
 		public int Id { get; set; }
 
@@ -28,6 +33,10 @@ namespace OnlineShop_4M_Models
 		// навигационное свойства
 		[ForeignKey("CategoryId")]
 		public Category Category { get; set; }
+
+		[NotMapped]
+		[Range(1,10000)]
+		public int TempCount { get; set; }
 	}
 }
 

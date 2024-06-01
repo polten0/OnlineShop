@@ -15,6 +15,26 @@
 
     <a class="btn btn-success" asp-action="Index">Назад</a>
 
+    @if (User.IsInRole(PathManager.AdminRole))
+    {
+        <div>
+            Count:
+        </div>
+
+        <div>
+            @if (Model.ExistsInCart)
+            {
+                <input disabled asp-for="@Model.Product.TempCount" class="form-control" />
+            }
+            else
+            {
+                <input asp-for="@Model.Product.TempCount" class="form-control" />
+            }
+        </div>
+
+    }
+
+
     @if (Model.ExistsInCart)
     {
         <a class="btn btn-warning" asp-action="RemoveFromCart"

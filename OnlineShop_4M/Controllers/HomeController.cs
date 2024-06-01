@@ -92,7 +92,7 @@ public class HomeController : Controller
     }
 
     [HttpPost, ActionName("Details")]
-    public IActionResult DetailsPost(int id)
+    public IActionResult DetailsPost(int id, DetailsViewModel detailsViewModel)
     {
         // создаем список для корзины покупок
         List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
@@ -107,7 +107,7 @@ public class HomeController : Controller
         }
 
         // добавить id продукта в корзину
-        shoppingCartList.Add(new ShoppingCart() { ProductId = id });
+        shoppingCartList.Add(new ShoppingCart() { ProductId = id, Count = detailsViewModel.Product.TempCount });
 
         // установить сессиию - обновить
         HttpContext.Session.Set(PathManager.SessionCart, shoppingCartList);

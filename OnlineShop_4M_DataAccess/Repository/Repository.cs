@@ -108,6 +108,10 @@ namespace OnlineShop_4M_DataAccess.Repository
             return query.FirstOrDefault();
         }
 
+        public void RemoveRange(IEnumerable<T> entity)
+        {
+            dbSet.RemoveRange(entity);
+        }
     }
 }
 
