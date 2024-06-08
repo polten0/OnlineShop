@@ -14,6 +14,14 @@ namespace OnlineShop_4M_Utility
 
 		public const string CategoryName = "Category";
 		public const string CompanyName = "Company";
-	}
+
+		public const string StatusPending = "Pending";
+        public const string StatusApproved = "Approved";
+        public const string StatusAtWork = "AtWork";
+        public const string StatusShipped = "Shipped";
+        public const string StatusCancelled = "Cancelled";
+        public const string StatusRefunded = "Refunded";
+        public const string StatusPaid = "Paid";
+    }
 }
 

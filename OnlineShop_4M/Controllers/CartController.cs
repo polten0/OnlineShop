@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Operations;
 using OnlineShop_4M_DataAccess.Data;
+using OnlineShop_4M_DataAccess.Repository;
 using OnlineShop_4M_DataAccess.Repository.IRepository;
 using OnlineShop_4M_Models;
 using OnlineShop_4M_Models.ViewModels;
@@ -23,9 +26,13 @@ namespace OnlineShop_4M.Controllers
         private IInquiryHeaderRepository inquiryHeaderRepository;
         private IInquiryDetailRepository inquiryDetailRepository;
 
+        private IOrderDetailRepository orderDetailRepository;
+        private IOrderHeaderRepository orderHeaderRepository;
+
         public CartController(IProductRepository productRepository, IApplicationUserRepository userRepository,
             IInquiryHeaderRepository inquiryHeaderRepository, IInquiryDetailRepository inquiryDetailRepository,
-            IWebHostEnvironment hostEnvironment, IEmailSender emailSender)
+            IWebHostEnvironment hostEnvironment, IEmailSender emailSender, 
+            IOrderHeaderRepository orderHeaderRepository, IOrderDetailRepository orderDetailRepository)
         {
             this.inquiryDetailRepository = inquiryDetailRepository;
             this.productRepository = productRepository;
@@ -34,6 +41,9 @@ namespace OnlineShop_4M.Controllers
 
             this.hostEnvironment = hostEnvironment;
             this.emailSender = emailSender;
+
+            this.orderDetailRepository = orderDetailRepository;
+            this.orderHeaderRepository = orderHeaderRepository;
         }
 
         public IActionResult Index()
@@ -125,7 +135,7 @@ namespace OnlineShop_4M.Controllers
             // извлекаем продукты по id
             // IEnumerable<Product> productList = 
             //     context.Product.Where(x => productIdCart.Contains(x.Id));
-            IEnumerable<Product> productListTemp = productRepository.GetAll(x => productIdCart.Contains(x.Id));
+            List<Product> productListTemp = productRepository.GetAll(x => productIdCart.Contains(x.Id)).ToList();
 
             List<Product> productList = new List<Product>();
 
@@ -147,8 +157,10 @@ namespace OnlineShop_4M.Controllers
             return View(viewModel);
         }
 
-        public IActionResult InquiryConfirmation()
+        public IActionResult InquiryConfirmation(int id = 0)
         {
+            OrderHeader orderHeader = orderHeaderRepository.FirstOrDefault(x => x.Id == id);
+
             HttpContext.Session.Clear();
 
             return View();
@@ -163,60 +175,128 @@ namespace OnlineShop_4M.Controllers
             var indetyClaims = (ClaimsIdentity)User.Identity;
             var claim = indetyClaims?.FindFirst(ClaimTypes.NameIdentifier);
 
-            var pathTemplate = hostEnvironment.WebRootPath +
-                PathManager.TemplatesPath + "inquiry.html";
-
-            var bodyHtml = await System.IO.File.ReadAllTextAsync(pathTemplate);
-
-            var textProducts = "";
-
-            foreach (var product in productUserViewModel.ProductList)
+            if (User.IsInRole(PathManager.AdminRole))
             {
-                textProducts += $"- Name: {product.Name} " +
-                    $"<span style='font-size: 14px; color: green'>(ID: {product.Id})</span>" +
-                    "<br>";
-            }
+                var orderTotal = 0.0;
 
-            var body = string.Format(
-                bodyHtml,
-                productUserViewModel.ApplicationUser.FullName,
-                productUserViewModel.ApplicationUser.PhoneNumber,
-                textProducts
-            );
-
-            await emailSender.SendEmailAsync(
-                productUserViewModel.ApplicationUser.Email,
-                "Новый заказ",
-                body
-            );
-
-            var inquiryHeader = new InquiryHeader()
-            {
-                ApplicationUserId = claim.Value,
-                ApplicationUser = userRepository.FirstOrDefault(x => x.Id == claim.Value),
-                FullName = productUserViewModel.ApplicationUser.FullName,
-                Email = productUserViewModel.ApplicationUser.Email,
-                PhoneNumber = productUserViewModel.ApplicationUser.PhoneNumber ?? "+70000000000",
-                InquiryDate = DateTime.Now
-            };
-
-            inquiryHeaderRepository.Add(inquiryHeader);
-            inquiryHeaderRepository.Save();
-
-            foreach (var product in productUserViewModel.ProductList)
-            {
-                var inquiryDetail = new InquiryDetail()
+                foreach (var item in productUserViewModel.ProductList)
                 {
-                    InquiryHeaderId = inquiryHeader.Id,
-                    ProductId = product.Id
+                    orderTotal += item.Price * item.TempCount;
+                }
+
+                OrderHeader orderHeader = new OrderHeader()
+                {
+                    CreatedByUserId = claim.Value,
+                    OrderTotal = orderTotal,
+                    City = productUserViewModel.ApplicationUser.City,
+                    FullName = productUserViewModel.ApplicationUser.FullName,
+                    Email = productUserViewModel.ApplicationUser.Email,
+                    PhoneNumber = productUserViewModel.ApplicationUser.PhoneNumber,
+                    OrderDate = DateTime.Now,
+                    OrderStatus = PathManager.StatusPending,
+                    TransactionId = ""
                 };
 
-                inquiryDetailRepository.Add(inquiryDetail);
+                orderHeaderRepository.Add(orderHeader);
+                orderHeaderRepository.Save();
+
+                foreach (var product in productUserViewModel.ProductList)
+                {
+                    OrderDetail orderDetail = new OrderDetail()
+                    {
+                        OrderHeaderId = orderHeader.Id,
+                        PricePer = product.Price,
+                        Count = product.TempCount,
+                        ProductId = product.Id
+                    };
+
+                    orderDetailRepository.Add(orderDetail);
+                }
+                orderDetailRepository.Save();
+
+                return RedirectToAction(nameof(InquiryConfirmation), new {id = orderHeader.Id});
+            }
+            else
+            {
+                var pathTemplate = hostEnvironment.WebRootPath +
+                PathManager.TemplatesPath + "inquiry.html";
+
+                var bodyHtml = await System.IO.File.ReadAllTextAsync(pathTemplate);
+
+                var textProducts = "";
+
+                foreach (var product in productUserViewModel.ProductList)
+                {
+                    textProducts += $"- Name: {product.Name} " +
+                        $"<span style='font-size: 14px; color: green'>(ID: {product.Id})</span>" +
+                        "<br>";
+                }
+
+                var body = string.Format(
+                    bodyHtml,
+                    productUserViewModel.ApplicationUser.FullName,
+                    productUserViewModel.ApplicationUser.PhoneNumber,
+                    textProducts
+                );
+
+                await emailSender.SendEmailAsync(
+                    productUserViewModel.ApplicationUser.Email,
+                    "Новый заказ",
+                    body
+                );
+
+                var inquiryHeader = new InquiryHeader()
+                {
+                    ApplicationUserId = claim.Value,
+                    ApplicationUser = userRepository.FirstOrDefault(x => x.Id == claim.Value),
+                    FullName = productUserViewModel.ApplicationUser.FullName,
+                    Email = productUserViewModel.ApplicationUser.Email,
+                    PhoneNumber = productUserViewModel.ApplicationUser.PhoneNumber ?? "+70000000000",
+                    InquiryDate = DateTime.Now
+                };
+
+                inquiryHeaderRepository.Add(inquiryHeader);
+                inquiryHeaderRepository.Save();
+
+                foreach (var product in productUserViewModel.ProductList)
+                {
+                    var inquiryDetail = new InquiryDetail()
+                    {
+                        InquiryHeaderId = inquiryHeader.Id,
+                        ProductId = product.Id
+                    };
+
+                    inquiryDetailRepository.Add(inquiryDetail);
+                }
+
+                inquiryDetailRepository.Save();
+
+                return RedirectToAction(nameof(InquiryConfirmation));
+            }
+        }
+
+        public IActionResult UpdateCart(List<Product> productList)
+        {
+            List<ShoppingCart> shoppingCarts = new List<ShoppingCart>();
+
+            foreach (var product in productList)
+            {
+                shoppingCarts.Add( new ShoppingCart()
+                {
+                    ProductId = product.Id,
+                    Count = product.TempCount
+                });
             }
 
-            inquiryDetailRepository.Save();
+            HttpContext.Session.Set(PathManager.SessionCart, shoppingCarts);
 
-            return RedirectToAction(nameof(InquiryConfirmation));
+            return RedirectToAction("Index");
+        }
+        public IActionResult Clear()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

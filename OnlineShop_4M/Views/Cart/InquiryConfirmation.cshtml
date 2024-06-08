@@ -1,5 +1,16 @@
-﻿<div class="text-center">
+﻿@model OnlineShop_4M_Models.OrderHeader
+
+<div class="text-center">
     <h1>Информация</h1>
 
-    <p>Мы отправили письмо вам на почту</p>
+    @if (Model is not null)
+    {
+        <p>
+            Заказ номер @Model.Id был создан
+        </p>
+    }
+    else
+    {
+        <p>Мы отправили запрос вам на почту</p>
+    }
 </div>
